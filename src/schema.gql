@@ -1,0 +1,59 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Image {
+  id: Int!
+  url: String!
+  priority: Int!
+  productId: Int
+  product: Product!
+}
+
+type Product {
+  id: Int!
+  name: String!
+  price: Float!
+  status: String!
+  images: [Image!]
+}
+
+type Query {
+  products: [Product!]!
+  product(id: Int!): Product!
+  images: [Image!]!
+  image(id: Int!): Image!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!, id: Int!): Product!
+  removeProduct(id: Int!): Product!
+  createImage(createImageInput: CreateImageInput!): Image!
+  updateImage(updateImageInput: UpdateImageInput!, id: Int!): Image!
+  removeImage(id: Int!): Image!
+}
+
+input CreateProductInput {
+  name: String!
+  price: Float!
+  status: String = "active"
+}
+
+input UpdateProductInput {
+  name: String
+  price: Float
+  status: String
+}
+
+input CreateImageInput {
+  url: String!
+  priority: Int! = 1000
+  productId: Int
+}
+
+input UpdateImageInput {
+  url: String
+  priority: Int = 1000
+  productId: Int
+}
