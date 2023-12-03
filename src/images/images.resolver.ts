@@ -37,7 +37,8 @@ export class ImagesResolver {
     @Args('updateImageInput') updateImageInput: UpdateImageInput,
     @Args('id', { type: () => Int }) id: number,
   ) {
-    return this.imagesService.update(id, updateImageInput);
+    let { url, priority } = updateImageInput;
+    return this.imagesService.update(id, { url, priority });
   }
 
   @ResolveField((returns) => Product)

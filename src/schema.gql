@@ -36,7 +36,7 @@ type Mutation {
 
 input CreateProductInput {
   name: String!
-  price: Float!
+  price: Int!
   status: String = "active"
 }
 

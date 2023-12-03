@@ -45,7 +45,8 @@ export class ProductsController {
     @Body() data: UpdateProductInput,
     @Param('id') id: number,
   ) {
-    return await this.productsService.update(id, data);
+    let { name, price, status } = data;
+    return await this.productsService.update(id, { name, price, status });
   }
 
   @Delete(':id')
