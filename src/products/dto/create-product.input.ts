@@ -1,12 +1,18 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { Image } from 'src/images/entities/image.entity';
+import { Field, Float, InputType, Int } from '@nestjs/graphql';
+import { IsAlpha, IsEnum, IsNumber } from 'class-validator';
+import { status } from './status.enum';
 
 @InputType()
 export class CreateProductInput {
   @Field()
+  @IsAlpha()
   name: string;
-  @Field(() => Int)
+
+  @IsNumber()
+  @Field(() => Float)
   price: number;
-  @Field({ nullable: true, defaultValue: 'active' })
-  status?: 'active' | 'inactive' = 'active';
+
+  @IsEnum(status)
+  @Field({ defaultValue: 'active' })
+  status: 'active' | 'inactive' = 'active';
 }

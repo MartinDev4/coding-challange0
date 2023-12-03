@@ -2,7 +2,7 @@ import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 import { Image } from 'src/images/entities/image.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('products')
 @ObjectType()
 export class Product {
   @PrimaryGeneratedColumn()
