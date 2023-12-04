@@ -18,9 +18,15 @@ export class ImagesService {
   async create(createImageInput: CreateImageInput) {
     let newImage = this.imagesRepository.create(createImageInput);
 
-    // if (newImage.productId) await this.productsService.addImage(newImage);
+    let savedImage = await this.imagesRepository.save(newImage);
 
-    return this.imagesRepository.save(newImage);
+    if (newImage.productId)
+      await this.productsService.assignImageToProduct(
+        newImage.productId,
+        savedImage.id,
+      );
+
+    return savedImage;
   }
 
   findAll() {
@@ -39,11 +45,9 @@ export class ImagesService {
     return this.productsService.findOne(productId);
   }
 
-  // async findImagesByProductId(productId: number) {
-  //   return (await this.imagesRepository.find()).filter(
-  //     (image) => image.productId === productId,
-  //   );
-  // }
+  async findImagesByImageIds(imagesIds: Number[]) {
+    return await this.imagesRepository.findByIds(imagesIds);
+  }
 
   async update(id: number, updateImageInput: UpdateImageInput) {
     let image = await this.findOne(id);

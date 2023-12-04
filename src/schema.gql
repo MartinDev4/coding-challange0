@@ -15,7 +15,7 @@ type Product {
   name: String!
   price: Float!
   status: String!
-  images: [Image!]
+  images: [Int!]!
 }
 
 type Query {
@@ -29,6 +29,7 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!, id: Int!): Product!
   removeProduct(id: Int!): Product!
+  assignImageToProduct(productId: Int!, imageId: Int!): Product!
   createImage(createImageInput: CreateImageInput!): Image!
   updateImage(updateImageInput: UpdateImageInput!, id: Int!): Image!
   removeImage(id: Int!): Image!
@@ -37,7 +38,8 @@ type Mutation {
 input CreateProductInput {
   name: String!
   price: Float!
-  status: String! = "active"
+  status: String = "active"
+  images: [Int!] = []
 }
 
 input UpdateProductInput {
@@ -54,6 +56,5 @@ input CreateImageInput {
 
 input UpdateImageInput {
   url: String
-  priority: Int = 1000
-  productId: Int
+  priority: Int
 }

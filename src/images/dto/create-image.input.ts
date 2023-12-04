@@ -1,9 +1,9 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsAlphanumeric, IsInt, IsNumber } from 'class-validator';
+import { IsAlphanumeric, IsInt, IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class CreateImageInput {
-  @IsAlphanumeric()
+  @IsString()
   @Field()
   url: string;
 

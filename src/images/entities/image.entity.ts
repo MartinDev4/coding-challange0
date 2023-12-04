@@ -20,7 +20,7 @@ export class Image {
   @Field((type) => Int)
   priority: number;
 
-  @Column()
+  @Column({ name: 'productId', type: 'int', nullable: true })
   @Field((type) => Int, { nullable: true })
   productId?: number;
 

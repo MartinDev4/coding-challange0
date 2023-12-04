@@ -31,21 +31,17 @@ export class ProductsService {
     });
   }
 
-  // async findImagesByProductId(productId: number) {
-  //   return await this.imagesService.findImagesByProductId(productId);
-  // }
-
-  async addImage(newImage: Image) {
-    const product = await this.findOne(newImage.productId);
+  async assignImageToProduct(productId: number, imageId: number) {
+    const product: Product = await this.findOne(productId);
 
     if (!product) return null;
 
+    console.log(product);
+
     if (!product.images) product.images = [];
-    product.images.push(newImage);
-    return this.productsRepository.save(product).then((savedProduct) => {
-      console.log(savedProduct);
-      return savedProduct;
-    });
+
+    product.images = [...product.images, imageId];
+    return this.productsRepository.save(product);
   }
 
   async update(id: number, updateProductInput: UpdateProductInput) {

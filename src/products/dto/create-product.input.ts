@@ -13,6 +13,9 @@ export class CreateProductInput {
   price: number;
 
   @IsEnum(status)
-  @Field({ defaultValue: 'active' })
-  status: 'active' | 'inactive' = 'active';
+  @Field({ defaultValue: 'active', nullable: true })
+  status?: 'active' | 'inactive' = 'active';
+
+  @Field((type) => [Int], { defaultValue: [], nullable: true })
+  images?: number[];
 }

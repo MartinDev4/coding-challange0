@@ -7,7 +7,7 @@ import { ImagesModule } from 'src/images/images.module';
 import { ProductsController } from './products.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product])],
+  imports: [TypeOrmModule.forFeature([Product]), ImagesModule],
   providers: [ProductsResolver, ProductsService],
   controllers: [ProductsController],
   exports: [ProductsService],

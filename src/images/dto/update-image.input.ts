@@ -1,14 +1,13 @@
-import { IsAlphanumeric, IsNumber } from 'class-validator';
-import { CreateImageInput } from './create-image.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { IsAlphanumeric, IsInt } from 'class-validator';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
-export class UpdateImageInput extends PartialType(CreateImageInput) {
+export class UpdateImageInput {
   @IsAlphanumeric()
   @Field({ nullable: true })
   url?: string;
 
-  @IsNumber()
+  @IsInt()
   @Field((type) => Int, { nullable: true })
   priority?: number;
 }
