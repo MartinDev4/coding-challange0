@@ -61,6 +61,6 @@ export class ProductsResolver {
 
   @ResolveField('images', () => [Image], { nullable: true })
   async images(@Parent() product: Product) {
-    return await this.imagesService.findImagesByImageIds(product.images);
+    return await this.imagesService.findAllByProductId(product.id);
   }
 }

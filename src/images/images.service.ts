@@ -16,21 +16,27 @@ export class ImagesService {
   ) {}
 
   async create(createImageInput: CreateImageInput) {
-    let newImage = this.imagesRepository.create(createImageInput);
+    const newImage = this.imagesRepository.create(createImageInput);
 
-    let savedImage = await this.imagesRepository.save(newImage);
+    const savedImage = await this.imagesRepository.save(newImage);
 
-    // if (newImage.productId)
-    //   await this.productsService.assignImageToProduct(
-    //     newImage.productId,
-    //     savedImage.id,
-    //   );
+    if (newImage.productId)
+      await this.productsService.assignImageToProduct(
+        newImage.productId,
+        savedImage.id,
+      );
 
     return savedImage;
   }
 
   findAll() {
     return this.imagesRepository.find();
+  }
+
+  findAllByProductId(productId: number): Promise<Image[]> {
+    return this.imagesRepository.find({
+      where: { product: { id: productId } },
+    });
   }
 
   findOne(id: number) {

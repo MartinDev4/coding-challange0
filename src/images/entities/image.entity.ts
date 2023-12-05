@@ -20,11 +20,11 @@ export class Image {
   @Field((type) => Int)
   priority: number;
 
-  @Column({ name: 'productId', type: 'int', nullable: true })
-  @Field((type) => Int, { nullable: true })
+  @Column({ nullable: true })
+  // @Field((type) => Int, { nullable: true })
   productId?: number;
 
   @ManyToOne(() => Product, (product) => product.images, { eager: true })
-  @Field((type) => Product, { nullable: true })
+  // @Field((type) => Product, { nullable: true })
   product?: Product;
 }

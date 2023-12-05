@@ -1,6 +1,7 @@
 import { Field, Float, InputType, Int } from '@nestjs/graphql';
 import { IsAlpha, IsEnum, IsNumber, IsOptional } from 'class-validator';
 import { status } from './status.enum';
+import { Image } from '../../images/entities/image.entity';
 
 @InputType()
 export class CreateProductInput {
@@ -19,5 +20,5 @@ export class CreateProductInput {
 
   @IsOptional()
   @Field((type) => [Int], { defaultValue: [], nullable: true })
-  images?: number[];
+  images?: Image[];
 }

@@ -6,8 +6,7 @@ type Image {
   id: Int!
   url: String!
   priority: Int!
-  productId: Int
-  product: Product
+  product: Product!
 }
 
 type Product {
@@ -15,7 +14,7 @@ type Product {
   name: String!
   price: Float!
   status: String!
-  images: [Int!]
+  images: [Image!]
 }
 
 type Query {

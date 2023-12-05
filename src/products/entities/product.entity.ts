@@ -27,8 +27,8 @@ export class Product {
   @Field()
   status?: 'active' | 'inactive';
 
-  @Column('integer', { array: true, nullable: true })
+  // @Column('integer', { array: true, nullable: true })
   @OneToMany(() => Image, (image) => image.product)
-  @Field((type) => [Int], { defaultValue: [], nullable: true })
-  images?: number[];
+  // @Field((type) => [Int], { defaultValue: [], nullable: true })
+  images?: Image[];
 }

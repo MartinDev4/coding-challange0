@@ -14,13 +14,16 @@ export class ProductsService {
   ) {}
 
   create(createProductInput: CreateProductInput) {
-    let newProduct = this.productsRepository.create(createProductInput);
+    const newProduct = this.productsRepository.create(createProductInput);
 
     return this.productsRepository.save(newProduct);
+    // return null;
   }
 
-  findAll() {
-    return this.productsRepository.find();
+  async findAll(): Promise<Product[]> {
+    return this.productsRepository.find({
+      relations: ['images'], // This will include images in the result
+    });
   }
 
   async findOne(id: number): Promise<Product> {
@@ -34,22 +37,23 @@ export class ProductsService {
     productId: number,
     imageId: number,
   ): Promise<Product> {
-    const product = await this.productsRepository.findOneOrFail({
-      where: { id: productId },
-      relations: ['images'],
-    });
-
-    if (!product) return null;
-
-    if (!product.images) {
-      product.images = [imageId]; // Initialize the array with the first image ID
-    } else {
-      if (!product.images.includes(imageId)) {
-        product.images.push(imageId); // Add the image ID to the array if it's not already included
-      }
-    }
-
-    return this.productsRepository.save(product);
+    // const product = await this.productsRepository.findOneOrFail({
+    //   where: { id: productId },
+    //   relations: ['images'],
+    // });
+    //
+    // if (!product) return null;
+    //
+    // if (!product.images) {
+    //   product.images = [imageId]; // Initialize the array with the first image ID
+    // } else {
+    //   if (!product.images.includes(imageId)) {
+    //     product.images.push(imageId); // Add the image ID to the array if it's not already included
+    //   }
+    // }
+    //
+    // return this.productsRepository.save(product);
+    return null;
   }
 
   async update(id: number, updateProductInput: UpdateProductInput) {
