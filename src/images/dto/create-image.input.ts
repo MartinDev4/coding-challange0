@@ -1,5 +1,11 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsAlphanumeric, IsInt, IsNumber, IsString } from 'class-validator';
+import {
+  IsAlphanumeric,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 @InputType()
 export class CreateImageInput {
@@ -12,6 +18,7 @@ export class CreateImageInput {
   priority: number = 1000;
 
   @IsInt()
+  @IsOptional()
   @Field((type) => Int, { nullable: true })
   productId?: number;
 }
