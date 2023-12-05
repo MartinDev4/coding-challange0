@@ -15,10 +15,14 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: ':memory:',
-      entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'test1234',
+      database: 'postgres',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true, // Set to false in production
     }),
     ProductsModule,
     ImagesModule,

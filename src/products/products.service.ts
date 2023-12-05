@@ -23,24 +23,32 @@ export class ProductsService {
     return this.productsRepository.find();
   }
 
-  findOne(id: number): Promise<Product> {
-    return this.productsRepository.findOneOrFail({
-      where: {
-        id,
-      },
+  async findOne(id: number): Promise<Product> {
+    if (!id) return null;
+    return await this.productsRepository.findOne({
+      where: { id },
     });
   }
 
-  async assignImageToProduct(productId: number, imageId: number) {
-    const product: Product = await this.findOne(productId);
+  async assignImageToProduct(
+    productId: number,
+    imageId: number,
+  ): Promise<Product> {
+    const product = await this.productsRepository.findOneOrFail({
+      where: { id: productId },
+      relations: ['images'],
+    });
 
     if (!product) return null;
 
-    console.log(product);
+    if (!product.images) {
+      product.images = [imageId]; // Initialize the array with the first image ID
+    } else {
+      if (!product.images.includes(imageId)) {
+        product.images.push(imageId); // Add the image ID to the array if it's not already included
+      }
+    }
 
-    if (!product.images) product.images = [];
-
-    product.images = [...product.images, imageId];
     return this.productsRepository.save(product);
   }
 
