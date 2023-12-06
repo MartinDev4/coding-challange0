@@ -51,14 +51,6 @@ export class ProductsResolver {
     return this.productsService.remove(id);
   }
 
-  @Mutation(() => Product)
-  assignImageToProduct(
-    @Args('productId', { type: () => Int }) productId: number,
-    @Args('imageId', { type: () => Int }) imageId: number,
-  ) {
-    return this.productsService.assignImageToProduct(productId, imageId);
-  }
-
   @ResolveField('images', () => [Image], { nullable: true })
   async images(@Parent() product: Product) {
     return await this.imagesService.findAllByProductId(product.id);

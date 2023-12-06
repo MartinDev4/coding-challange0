@@ -25,6 +25,6 @@ export class Image {
   productId?: number;
 
   @ManyToOne(() => Product, (product) => product.images, { eager: true })
-  // @Field((type) => Product, { nullable: true })
+  @Field((type) => Product, { nullable: true })
   product?: Product;
 }

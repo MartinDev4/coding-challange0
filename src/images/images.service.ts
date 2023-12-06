@@ -20,12 +20,6 @@ export class ImagesService {
 
     const savedImage = await this.imagesRepository.save(newImage);
 
-    if (newImage.productId)
-      await this.productsService.assignImageToProduct(
-        newImage.productId,
-        savedImage.id,
-      );
-
     return savedImage;
   }
 
@@ -51,21 +45,30 @@ export class ImagesService {
     return this.productsService.findOne(productId);
   }
 
-  async findImagesByImageIds(imagesIds: number[]) {
-    try {
-      if (!imagesIds) return;
-      const promises = imagesIds.map(async (id) => {
-        const image = await this.imagesRepository.findOne({ where: { id } });
-        return image;
-      });
+  // async findImagesByImageIds(imagesIds: number[]) {
+  //   try {
+  //     if (!imagesIds) return;
+  //     const promises = imagesIds.map(async (id) => {
+  //       const image = await this.imagesRepository.findOne({ where: { id } });
+  //       return image;
+  //     });
 
-      const images = await Promise.all(promises);
+  //     const images = await Promise.all(promises);
 
-      return images.filter((image) => image !== undefined);
-    } catch (error) {
-      console.error('Error finding images:', error);
-      throw error;
-    }
+  //     return images.filter((image) => image !== undefined);
+  //   } catch (error) {
+  //     console.error('Error finding images:', error);
+  //     throw error;
+  //   }
+  // }
+
+  async assignImageToProduct(
+    productId: number,
+    imageId: number,
+  ): Promise<Image> {
+    let image = await this.findOne(imageId);
+    image.productId = productId;
+    return this.imagesRepository.save(image);
   }
 
   async update(id: number, updateImageInput: UpdateImageInput) {

@@ -47,6 +47,14 @@ export class ImagesResolver {
   }
 
   @Mutation(() => Image)
+  assignImageToProduct(
+    @Args('productId', { type: () => Int }) productId: number,
+    @Args('imageId', { type: () => Int }) imageId: number,
+  ) {
+    return this.imagesService.assignImageToProduct(productId, imageId);
+  }
+
+  @Mutation(() => Image)
   removeImage(@Args('id', { type: () => Int }) id: number) {
     return this.imagesService.remove(id);
   }

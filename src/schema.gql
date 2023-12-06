@@ -6,7 +6,7 @@ type Image {
   id: Int!
   url: String!
   priority: Int!
-  product: Product!
+  product: Product
 }
 
 type Product {
@@ -28,9 +28,9 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!, id: Int!): Product!
   removeProduct(id: Int!): Product!
-  assignImageToProduct(productId: Int!, imageId: Int!): Product!
   createImage(createImageInput: CreateImageInput!): Image!
   updateImage(updateImageInput: UpdateImageInput!, id: Int!): Image!
+  assignImageToProduct(productId: Int!, imageId: Int!): Image!
   removeImage(id: Int!): Image!
 }
 

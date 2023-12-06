@@ -33,29 +33,6 @@ export class ProductsService {
     });
   }
 
-  async assignImageToProduct(
-    productId: number,
-    imageId: number,
-  ): Promise<Product> {
-    // const product = await this.productsRepository.findOneOrFail({
-    //   where: { id: productId },
-    //   relations: ['images'],
-    // });
-    //
-    // if (!product) return null;
-    //
-    // if (!product.images) {
-    //   product.images = [imageId]; // Initialize the array with the first image ID
-    // } else {
-    //   if (!product.images.includes(imageId)) {
-    //     product.images.push(imageId); // Add the image ID to the array if it's not already included
-    //   }
-    // }
-    //
-    // return this.productsRepository.save(product);
-    return null;
-  }
-
   async update(id: number, updateProductInput: UpdateProductInput) {
     let product = await this.findOne(id);
     Object.assign(product, updateProductInput);
